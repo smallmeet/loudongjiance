@@ -6,14 +6,12 @@ import urllib.request
 
 
 def get(url):
-	header_dict = {'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
-	try:
-		page = urllib.request.urlopen(url).read()
-		pagedecode = page.decode('utf-8')  # decode
-	except Exception as e:
-		print(e)
-	assert isinstance(pagedecode, str)
-	print(pagedecode)
-	return pagedecode
+    user_agent = 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'
+    headers = {'User-Agent': user_agent}
+    req = urllib.request.Request(url, headers)
+    response = urllib.request.urlopen(req)
+    page = response.read().decode('UTF8')
+    print(page)
+    return page
 
-
+get("http://www.baidu.com")
