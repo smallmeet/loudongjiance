@@ -5,23 +5,26 @@ from handle import get
 import re
 
 
-def get_page_num(): # get the number of the page
-	frist_page = get('http://wooyun.org/bugs/')
-	try:
-		page_num = re.findall(r'共.*条纪录, (\d{4,8}) 页', frist_page)[0]
-		page_num = int(page_num)
-		print(page_num)
-	except Exception as e:
-		print(e)
-
-
 def bug_urls(url):
-	"""
+    page = get(url)
+    x = re.findall(r'<a href="/bugs/(wooyun-\d{4}-\d{7})">.*</a>', page)
+    return x
 
-	:return: urls list
-	"""
-	page = get(url)
-	x = re.findall(r'<a href="/bugs/(wooyun-\d{4}-\d{7})">(.{0,50})</a>',page)
-	print(x)
 
-bug_urls('http://wooyun.org/bugs/page/2')
+def handle_pages(last_bugs_id):
+    r_i = []
+    for x in range(1, 10):
+        url = url = 'http://wooyun.org/bugs/page/%d'% x
+        bugs_id = bug_urls(url)
+        for r_id in bugs_id:
+            if r_id != last_bugs_id:
+                r_i.append(r_id)
+            elif r_id == last_bugs_id:
+                return r_i
+    return r_i
+
+
+
+i = handle_pages('wooyun-2016-0216593')
+print(len(i))
+print(i)
