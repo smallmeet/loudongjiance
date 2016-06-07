@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# _*_ encodding = utf-8 _*_
+# _*_ codding = utf-8 _*_
 # author : k3vi
 # handle HTTP request
 import urllib.request
