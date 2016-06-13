@@ -54,3 +54,9 @@ def matching_keywords(keywords=getkeyWord()):  # 处理关键字
 def https_get(url):
     user_agent = 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'
     headers = {"User-Agent": user_agent}
+    try:
+        f = requests.get(url,params=headers)
+        page = f.text
+        return  page
+    except Exception as e:
+        print(e)

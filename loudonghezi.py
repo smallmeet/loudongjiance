@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup as bs
-from handle import get, matching_keywords
+from handle import  matching_keywords
+from handle import https_get as get
 from mysqldb import loudonghezi_last_update, loudonghezi_last, loudonghezi_insert
 import re
 
