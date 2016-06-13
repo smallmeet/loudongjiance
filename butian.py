@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup as bs
 from  mysqldb import butian_last_update, butian_last, butian_insert
 from handle import get, matching_keywords
 import re
+import sys
 
 
 last_data =  butian_last()
@@ -15,10 +16,14 @@ def get_qid():                        # 抓取每页的ID并与上次任务对�
         url = 'http://loudong.360.cn/vul/list/page/%d' % n
         n_page = get(url)
         soup = bs(n_page, "html.parser")
-        for item in soup.find_all('p', class_='list-view'):
+        items = soup.find_all('p', class_='list-view')
+        for item in items:
             t = str(item.find('a', class_=''))[23:39]
             if t == last_data:
-                butian_last_update(li[0])
+                if last_data != str(items[0].find('a', class_=''))[23:39]:
+                    butian_last_update(li[0])
+                else :
+                    sys.exit()
                 return li
             li.append(t)
 

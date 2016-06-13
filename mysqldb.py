@@ -105,11 +105,7 @@ def loudonghezi_last_update(id):
 
 
 # wooyun插入漏洞
-def wooyun_insert(name,link,time,keyword) -> object:
-    """
-
-    :rtype: object
-    """
+def wooyun_insert(name,link,time,keyword):
     connection = connect()
     try:
         cursor = connection.cursor()

@@ -8,6 +8,7 @@ import threading
 
 
 def main():
+    """
     threads = []
     t1 = threading.Thread(target=wooyun())
     threads.append(t1)
@@ -18,6 +19,10 @@ def main():
     for t in threads:
         t.setDaemon(True)
         t.start()
+    """
+    wooyun()
+    butian()
+    loudonghezi()
 
 
 if __name__ == "__main__":
