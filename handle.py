@@ -4,7 +4,7 @@
 # handle HTTP request
 import urllib.request
 import urllib.parse
-
+from mysqldb import getkeyWord
 
 def get(url):  # 发送get请求，返回网页内容
     user_agent = 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'
@@ -49,3 +49,13 @@ def to_str(bytes_or_str):     # 接受str和bytes，并总返回str
     else:
         value = bytes_or_str
     return value
+
+
+def matching_keywords(keywords=getkeyWord()):  # 处理关键字
+    key_str = ''
+    for key in keywords:
+        if keywords[len(keywords) - 1] != key:
+            key_str += key + '|'
+        else:
+            key_str += key
+    return key_str
