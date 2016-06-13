@@ -21,7 +21,7 @@ def handle_pages(last_bugs_id):  # 页面中所有未处理的漏洞编号
             if r_id != last_bugs_id:
                 r_i.append(r_id)
             elif r_id == last_bugs_id:
-                wooyun_last_update(r_i[-1])
+                wooyun_last_update(r_i[0])
                 return r_i
     return r_i
 

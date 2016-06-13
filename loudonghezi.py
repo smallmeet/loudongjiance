@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup as bs
-from handle import get, deal_tags
-from mysqldb import loudonghezi_insert, loudonghezi_last, loudonghezi_last_update
+from handle import get, matching_keywords
+from mysqldb import loudonghezi_last_update, loudonghezi_last, loudonghezi_insert
 import re
+
+
+last_data = loudonghezi_last()
 
 
 def get_qid(last_data):                        # 抓取每页的ID并与上次任务对比
@@ -11,10 +14,11 @@ def get_qid(last_data):                        # 抓取每页的ID并与上次�
     for n in range(1, 10):
         url = 'https://www.vulbox.com/board/internet/page/%d' % n
         n_page = get(url)
-        soup = bs(n_page, "lxml")
+        soup = bs(n_page, "html.parser")
         for item in soup.find_all(href=re.compile('^/bugs/'), class_='btn btn-default btn-check'):
             t = str(item)[49:67]
             if t == last_data:
+                loudonghezi_last_update(li[0])
                 return li
             li.append(t)
 
@@ -27,27 +31,22 @@ def get_url():                                  # 获取每个id对应链接
     return url_data
 
 
-def get_match():
-    ti = []
-    ur = []
-    date = []
-    keyword = []
+def main():
+    m_keyword = matching_keywords()
     for n in get_url():
         n_page = get(n)
-        soup = bs(n_page, 'lxml')
-        text = soup.find_all(text=re.compile('博客|上海|江苏|xss'), limit=1)
+        soup = bs(n_page, "html.parser")
+        text = soup.find_all(text=re.compile(m_keyword), limit=1)
         if text:
-            keyword_back = re.search(r'博客|上海|江苏|xss', text[0])
+            keyword_back = re.search(m_keyword, text[0])
             title = soup.h3.string
             time = soup.find('span', class_='time').string[0:10]
-            ti.append(title)
-            ur.append(n[28:46])
-            date.append(time)
-            keyword.append(keyword_back.group(0))
-    return ti, ur, date, keyword
+            vul_name = title  # 漏洞名称
+            vul_id = n[28:46]  # 漏洞编号
+            vul_time = time  # 漏洞发布时间
+            vul_keyword = keyword_back.group(0)  # 关键字
+            loudonghezi_insert(vul_name, vul_id, vul_time, vul_keyword)
 
 
-def main():
-    last_data = 'vulbox-2016-022179'
-    x = get_match()
-    print(x)
+if __name__ == '__main__':
+    main()
