@@ -5,6 +5,7 @@ from handle import  matching_keywords
 from handle import https_get as get
 from mysqldb import loudonghezi_last_update, loudonghezi_last, loudonghezi_insert
 import re
+import sys
 
 
 last_data = loudonghezi_last()
@@ -15,15 +16,17 @@ def get_qid(last_data):                        # 抓取每页的ID并与上次�
     for n in range(1, 10):
         url = 'https://www.vulbox.com/board/internet/page/%d' % n
         n_page = get(url)
-        print(n_page)
         soup = bs(n_page, "html.parser")
-        for item in soup.find_all(href=re.compile('^/bugs/'), class_='btn btn-default btn-check'):
+        items = soup.find_all(href=re.compile('^/bugs/'), class_='btn btn-default btn-check')
+        for item in items:
             t = str(item)[49:67]
-            if t == last_data:
-                loudonghezi_last_update(li[0])
-                return li
             li.append(t)
-
+            loudonghezi_last_update(li[0])
+            if t == last_data:
+                if last_data == str(items[0].find('a', class_=''))[23:39]:
+                    sys.exit()
+                return li
+    return li
 
 def get_url():                                  # 获取每个id对应链接
     url_data = []
@@ -34,6 +37,7 @@ def get_url():                                  # 获取每个id对应链接
 
 
 def main():
+    print("loudonghezi")
     m_keyword = matching_keywords()
     for n in get_url():
         n_page = get(n)

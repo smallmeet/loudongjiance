@@ -23,7 +23,9 @@ def main():
     wooyun()
     butian()
     loudonghezi()
+    
 
 
 if __name__ == "__main__":
+    print("start")
     main()

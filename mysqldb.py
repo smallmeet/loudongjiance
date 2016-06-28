@@ -7,7 +7,7 @@ import pymysql.cursors
 def connect():
     connection = pymysql.connect(host='localhost',
                                  user='root',
-                                 password='123456',
+                                 password='123456', #数据库密码
                                  db='jiankong',
                                  charset='utf8mb4',
                                  cursorclass=pymysql.cursors.DictCursor)
@@ -109,7 +109,7 @@ def wooyun_insert(name,link,time,keyword):
     connection = connect()
     try:
         cursor = connection.cursor()
-        sql = "insert into `wooyun`(`name`,`link`,`time`,`keyword`) VALUES ('%s','%s','%s')" % (name,link,time,keyword)
+        sql = "insert into `wooyun`(`name`,`link`,`time`,`keyword`) VALUES ('%s','%s','%s','%s')" % (name,link,time,keyword)
         cursor.execute(sql)
         connection.commit()
     finally:
@@ -121,7 +121,7 @@ def butian_insert(name, link, time, keyword):
     connection = connect()
     try:
         cursor = connection.cursor()
-        sql = "insert into `butian`(`name`,`link`,`time`,`keyword`) VALUES ('%s','%s','%s')" % (name,link,time,keyword)
+        sql = "insert into `butian`(`name`,`link`,`time`,`keyword`) VALUES ('%s','%s','%s','%s')" % (name,link,time,keyword)
         cursor.execute(sql)
         connection.commit()
     finally:
@@ -133,7 +133,7 @@ def loudonghezi_insert(name,link,time,keyword):
     connection = connect()
     try:
         cursor = connection.cursor()
-        sql = "insert into `loudonghezi`(`name`,`link`,`time`,`keyword`) VALUES ('%s','%s','%s')" % (name,link,time,keyword)
+        sql = "insert into `loudonghezi`(`name`,`link`,`time`,`keyword`) VALUES ('%s','%s','%s','%s')" % (name,link,time,keyword)
         cursor.execute(sql)
         connection.commit()
     finally:
