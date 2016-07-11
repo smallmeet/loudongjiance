@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7ab654a2-4c5c-4a97-98d6-436b8b388fe2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/wooyun.py" afterPath="$PROJECT_DIR$/wooyun.py" />
     </list>
     <ignored path="woospider.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -550,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1468228146087</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="新版更新，除了一个小问题外，其他正常">
+      <created>1468229855488</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1468229855488</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
