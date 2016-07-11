@@ -38,7 +38,7 @@ def qualified_bug(id):  #获取满足关键字条件的漏洞标号
 def insert_bug_info(page):    #插入数据
     try:
         title = re.findall(
-            r"<h3 class='wybug_title'>漏洞标题：\s+(\S+)\s+</h3>", page)[0]  # 获取漏洞名称
+            r"<h3 class='wybug_title'>漏洞标题：\s+(.+)\s+</h3>", page)[0][:-3].strip()  # 获取漏洞名称
         bug_id = re.findall(
             r'<h3>缺陷编号：\s+<a href="/bugs/(wooyun-\d{4}-\d{7})">WooYun-\d{4}-\d{6}</a>', page)[0]  # 漏洞id
         time = re.findall(r'提交时间：\s*(2016-\d{2}-\d{2})', page)[0]  # 获取漏洞发布时间
