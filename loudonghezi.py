@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup as bs
-from handle import  matching_keywords
+from handle import matching_keywords
 from handle import https_get as get
 from mysqldb import loudonghezi_last_update, loudonghezi_last, loudonghezi_insert
 import re
@@ -17,7 +17,8 @@ def get_qid(last_data):                        # 抓取每页的ID并与上次�
         url = 'https://www.vulbox.com/board/internet/page/%d' % n
         n_page = get(url)
         soup = bs(n_page, "html.parser")
-        items = soup.find_all(href=re.compile('^/bugs/'), class_='btn btn-default btn-check')
+        items = soup.find_all(
+            href=re.compile('^/bugs/'), class_='btn btn-default btn-check')
         for item in items:
             t = str(item)[49:67]
             li.append(t)
@@ -27,6 +28,7 @@ def get_qid(last_data):                        # 抓取每页的ID并与上次�
                     sys.exit()
                 return li
     return li
+
 
 def get_url():                                  # 获取每个id对应链接
     url_data = []

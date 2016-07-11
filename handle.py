@@ -8,7 +8,6 @@ import requests
 from mysqldb import getkeyWord
 
 
-
 def get(url):  # 发送get请求，返回网页内容
     user_agent = 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'
     headers = {"User-Agent": user_agent}
@@ -55,8 +54,8 @@ def https_get(url):
     user_agent = 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'
     headers = {"User-Agent": user_agent}
     try:
-        f = requests.get(url,params=headers)
+        f = requests.get(url, params=headers)
         page = f.text
-        return  page
+        return page
     except Exception as e:
         print(e)
