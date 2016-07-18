@@ -30,6 +30,7 @@ def get_bug_ids():      # 获取所有漏洞标号
 def qualified_bug(id):  #获取满足关键字条件的漏洞标号
     url = "http://www.wooyun.org/bugs/"+id
     page = get(url)
+    print(url)
     re_key = re.compile(deal_keyword())
     flag = re.search(re_key, page)
     return flag, page
